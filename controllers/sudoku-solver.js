@@ -1,6 +1,11 @@
 class SudokuSolver {
+  containsInvalidCharacters(puzzleString) {
+    const validCharactersRegex = /^[1-9.]+$/;
+    return !validCharactersRegex.test(puzzleString);
+  };
+
   validate(puzzleString) {
-    return puzzleString.length == 81;
+    return puzzleString.split('').length == 81;
   }
 
   checkRowPlacement(puzzleString, row, column, value) {
@@ -41,6 +46,7 @@ class SudokuSolver {
       if (index === -1) {
         return puzzle;
       }
+      if(this.containsInvalidCharacters(puzzle)) return false
 
       const row = Math.floor(index / 9);
       const col = index % 9;
